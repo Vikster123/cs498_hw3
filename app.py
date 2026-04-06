@@ -23,7 +23,7 @@ def root():
     return {"message": "EV API is running"}
 
 
-# 1) Fast but unsafe write
+
 @app.post("/insert-fast")
 def insert_fast(record: dict):
     try:
@@ -37,7 +37,7 @@ def insert_fast(record: dict):
 
 
 
-# 2) Highly durable write
+
 @app.post("/insert-safe")
 def insert_safe(record: dict):
     try:
@@ -50,7 +50,7 @@ def insert_safe(record: dict):
         raise HTTPException(status_code=500, detail=str(exc))
 
 
-# 3) Strongly consistent read
+
 @app.get("/count-tesla-primary")
 def count_tesla_primary():
     try:
@@ -63,7 +63,7 @@ def count_tesla_primary():
         raise HTTPException(status_code=500, detail=str(exc))
 
 
-# 4) Eventually consistent analytical read
+
 @app.get("/count-bmw-secondary")
 def count_bmw_secondary():
     try:
