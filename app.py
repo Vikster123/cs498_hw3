@@ -1,3 +1,4 @@
+
 import os
 from fastapi import FastAPI, HTTPException
 from pymongo import MongoClient
@@ -27,7 +28,7 @@ def root():
 @app.post("/insert-fast")
 def insert_fast(record: dict):
     try:
-        fast_collection = vehicles.with_options(
+        fast_insert = vehicles.with_options(
             write_concern=WriteConcern(w=1)
         )
         result = fast_collection.insert_one(record)
@@ -41,7 +42,7 @@ def insert_fast(record: dict):
 @app.post("/insert-safe")
 def insert_safe(record: dict):
     try:
-        safe_collection = vehicles.with_options(
+        safe_insert = vehicles.with_options(
             write_concern=WriteConcern(w="majority")
         )
         result = safe_collection.insert_one(record)
